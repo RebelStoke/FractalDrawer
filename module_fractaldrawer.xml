@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_fractaldrawer" default="compile.module.fractaldrawer">
+  <dirname property="module.fractaldrawer.basedir" file="${ant.file.module_fractaldrawer}"/>
+  
+  <property name="module.jdk.home.fractaldrawer" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.fractaldrawer" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.fractaldrawer" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.fractaldrawer" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="fractaldrawer.output.dir" value="${module.fractaldrawer.basedir}/out/production/FractalDrawer"/>
+  <property name="fractaldrawer.testoutput.dir" value="${module.fractaldrawer.basedir}/out/test/FractalDrawer"/>
+  
+  <path id="fractaldrawer.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="fractaldrawer.module.production.classpath">
+    <path refid="${module.jdk.classpath.fractaldrawer}"/>
+    <path refid="library.jfoenix-8.0.8.classpath"/>
+  </path>
+  
+  <path id="fractaldrawer.runtime.production.module.classpath">
+    <pathelement location="${fractaldrawer.output.dir}"/>
+    <path refid="library.jfoenix-8.0.8.classpath"/>
+  </path>
+  
+  <path id="fractaldrawer.module.classpath">
+    <path refid="${module.jdk.classpath.fractaldrawer}"/>
+    <pathelement location="${fractaldrawer.output.dir}"/>
+    <path refid="library.jfoenix-8.0.8.classpath"/>
+  </path>
+  
+  <path id="fractaldrawer.runtime.module.classpath">
+    <pathelement location="${fractaldrawer.testoutput.dir}"/>
+    <pathelement location="${fractaldrawer.output.dir}"/>
+    <path refid="library.jfoenix-8.0.8.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.fractaldrawer">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.fractaldrawer">
+    <patternset refid="excluded.from.module.fractaldrawer"/>
+  </patternset>
+  
+  <path id="fractaldrawer.module.sourcepath">
+    <dirset dir="${module.fractaldrawer.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.fractaldrawer" depends="compile.module.fractaldrawer.production,compile.module.fractaldrawer.tests" description="Compile module FractalDrawer"/>
+  
+  <target name="compile.module.fractaldrawer.production" depends="register.custom.compilers" description="Compile module FractalDrawer; production classes">
+    <mkdir dir="${fractaldrawer.output.dir}"/>
+    <javac2 destdir="${fractaldrawer.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.fractaldrawer}/javac">
+      <compilerarg line="${compiler.args.fractaldrawer}"/>
+      <bootclasspath refid="fractaldrawer.module.bootclasspath"/>
+      <classpath refid="fractaldrawer.module.production.classpath"/>
+      <src refid="fractaldrawer.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.fractaldrawer"/>
+    </javac2>
+    
+    <copy todir="${fractaldrawer.output.dir}">
+      <fileset dir="${module.fractaldrawer.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.fractaldrawer.tests" depends="register.custom.compilers,compile.module.fractaldrawer.production" description="compile module FractalDrawer; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.fractaldrawer" description="cleanup module">
+    <delete dir="${fractaldrawer.output.dir}"/>
+    <delete dir="${fractaldrawer.testoutput.dir}"/>
+  </target>
+</project>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1199.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainWindowController">
+   <children>
+      <Pane prefHeight="128.0" prefWidth="1199.0" style="-fx-border-color: black;">
+         <children>
+            <JFXButton layoutX="981.0" layoutY="28.0" onAction="#generate" prefHeight="54.0" prefWidth="139.0" style="-fx-border-color: black;" text="Generate" textOverrun="CLIP">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="60.0" layoutY="19.0" text="Complexity:" />
+            <Label layoutX="60.0" layoutY="52.0" text="Length Ratio:" />
+            <Label layoutX="454.0" layoutY="29.0" text="Angle:" />
+            <Label layoutX="454.0" layoutY="68.0" text="Branch Angle:" />
+            <JFXTextField fx:id="angleField" layoutX="567.0" layoutY="24.0" text="20" unFocusColor="#c31a1a" />
+            <JFXTextField fx:id="branchAngleField" layoutX="567.0" layoutY="61.0" text="20" unFocusColor="#c91515" />
+            <JFXSlider fx:id="complexity" layoutX="181.0" layoutY="16.0" majorTickUnit="1.0" max="12.0" min="3.0" minorTickCount="0" onDragDetected="#generate" showTickMarks="true" stylesheets="@MainWindow.css" value="9.0" />
+            <JFXSlider fx:id="lengthRatio" layoutX="181.0" layoutY="50.0" majorTickUnit="0.3" max="1.0" min="0.1" minorTickCount="0" onDragDetected="#generate" showTickMarks="true" stylesheets="@MainWindow.css" value="0.75" />
+            <JFXButton layoutX="873.0" layoutY="42.0" onAction="#random" style="-fx-border-color: black;" text="Random" />
+            <JFXSlider fx:id="branchLength" layoutX="181.0" layoutY="85.0" majorTickUnit="30.0" max="250.0" min="50.0" minorTickCount="0" onDragDetected="#generate" showTickMarks="true" stylesheets="@MainWindow.css" value="150.0" />
+            <Label layoutX="60.0" layoutY="88.0" text="Branch Length:" />
+         </children>
+      </Pane>
+      <Canvas fx:id="canvas" height="884.0" layoutY="127.0" width="1199.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Canvas>
+   </children>
+</AnchorPane>
